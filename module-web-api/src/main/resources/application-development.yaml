@@ -7,7 +7,13 @@ logging:
     root: info
     com.zaxxer.hikari.pool.HikariPool: debug
 
-debug: true
+token:
+  secret:
+    key: BongDevJWTSecretTokenValue1!2@3#4$
+  access-token:
+    plus-hour: 1
+  refresh-token:
+    plus-hour: 12
 
 spring:
   datasource:
@@ -21,19 +27,3 @@ spring:
       minimum-idle: 5
       max-lifetime: 240000
       maximum-pool-size: 20
-
-springdoc:
-  version: '@project.version@'
-  api-docs:
-    path: /api-docs
-  default-consumes-media-type: application/json
-  default-produces-media-type: application/json
-  swagger-ui:
-    operations-sorter: alpha
-    tags-sorter: alpha
-    path: /swagger-ui.html
-    disable-swagger-default-url: true
-    display-query-params-without-oauth2: true
-    doc-expansion: none
-  paths-to-match:
-    - /api/**
