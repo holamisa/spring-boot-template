@@ -1,0 +1,30 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' // 버전 정보는 부모에서 갖고온다
+	id 'io.spring.dependency-management' // 버전 정보는 부모에서 갖고온다
+}
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+bootJar {
+	enabled = false
+}
+jar {
+	enabled = true
+}
+
+dependencies {
+
+	// JPA
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+	// MyBats
+	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.3'
+
+	// MySQL
+	runtimeOnly 'com.mysql:mysql-connector-j'
+}

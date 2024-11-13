@@ -1,1 +1,3 @@
-rootProject.name = 'spring'
+rootProject.name = 'spring-template'
+include("module-db")
+include("module-web")

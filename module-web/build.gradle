@@ -1,0 +1,35 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' // 버전 정보는 부모에서 갖고온다
+	id 'io.spring.dependency-management' // 버전 정보는 부모에서 갖고온다
+}
+
+bootJar {
+	enabled = true
+}
+jar {
+	enabled = false
+}
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+dependencies {
+
+	// Spring Boot Web
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+
+	// DB 모듈
+	implementation project(":module-db")
+	
+	// JPA
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+	// MyBatis
+	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.3'
+
+	// Validation
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+}
