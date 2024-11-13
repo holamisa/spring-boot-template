@@ -20,11 +20,11 @@
         </encoder>
     </appender>
 
-    <springProfile name="dev">
+    <springProfile name="development">
         <include resource="logback-spring-dev.xml"/>
     </springProfile>
 
-    <springProfile name="prod">
+    <springProfile name="production">
         <include resource="logback-spring-prod.xml"/>
     </springProfile>
 

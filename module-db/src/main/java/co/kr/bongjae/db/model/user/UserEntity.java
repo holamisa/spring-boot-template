@@ -12,7 +12,7 @@ import lombok.experimental.SuperBuilder;
 import java.time.LocalDateTime;
 
 /**
- * 회원 엔티티
+ * 사용자 엔티티
  */
 @Data // toString + equals + hashCode + getter + setter + requiredArgsConstructor
 @SuperBuilder // 상속으로 통한 Builder이기에 필요 + 빌더 패턴 등록

@@ -2,25 +2,32 @@ package co.kr.bongjae.web.common.api;
 
 import co.kr.bongjae.web.common.error.ErrorCode;
 import co.kr.bongjae.web.common.error.ErrorCodeIf;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * 응답 결과를 담는 클래스
+ * 응답 결과 상세를 담는 클래스
  */
 @Data // toString + equals + hashCode + getter + setter + requiredArgsConstructor
 @NoArgsConstructor // 인자 없는 생성자
 @AllArgsConstructor // 모든 필드를 인자로 받는 생성자
 @Builder // 빌더 패턴 등록
+@Schema(title = "API 응답 결과 상세") // Swagger 문서화
 public class Result {
 
     // 2xx : Success Info
     // 4xx : Client Error
     // 5xx : Server Error
+    @Schema(description = "결과 코드")
     private Integer resultCode;
+
+    @Schema(description = "결과 메시지")
     private String resultMessage;
+
+    @Schema(description = "결과 설명")
     private String resultDescription;
 
     /**

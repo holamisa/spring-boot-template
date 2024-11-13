@@ -1,6 +1,7 @@
 package co.kr.bongjae.web.common.api;
 
 import co.kr.bongjae.web.common.error.ErrorCodeIf;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -15,17 +16,20 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor // 인자 없는 생성자
 @AllArgsConstructor // 모든 필드를 인자로 받는 생성자
 @Builder // 빌더 패턴 등록
+@Schema(title = "API 응답 결과") // Swagger 문서화
 public class ApiResult<T> {
 
     /**
-     * 응답 결과
+     * 응답 결과 상세
      */
+    @Schema(description = "응답 결과 상세")
     private Result result;
 
     /**
      * 응답 데이터
      */
     @Valid
+    @Schema(description = "Generic 응답 데이터")
     private T body;
 
     /**
