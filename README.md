@@ -1,2 +1,7 @@
 # spring-boot-template
-스프링 부트 템플릿
+
+# Spring Boot 템플릿
+
+### 멀티 모듈
+* DB 모듈
+* API 모듈
