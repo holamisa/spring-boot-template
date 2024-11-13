@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="co.kr.bongjae.db.mapper.UserMapper">
+    <select id="selectAllUser" resultType="co.kr.bongjae.db.model.user.UserEntity">
+        SELECT
+            id, name, email, password, status, address, registered_at, unregistered_at, last_login_at
+        FROM `user`;
+    </select>
+
+<!--    <insert id="insertUser" parameterType="co.kr.bongjae.db.model.user.UserEntity">-->
+<!--        INSERT INTO `user`-->
+<!--        (name, email, password, status, address, registered_at)-->
+<!--        VALUES-->
+<!--        (#{name}, #{email}, #{password}, #{status}, #{address}, #{registeredAt});-->
+<!--    </insert>-->
+</mapper>

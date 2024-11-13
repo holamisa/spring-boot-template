@@ -1,0 +1,39 @@
+server:
+  port: 8080
+
+logging:
+  level:
+    org.hibernate.SQL: info
+    root: info
+    com.zaxxer.hikari.pool.HikariPool: debug
+
+debug: true
+
+spring:
+  datasource:
+    jdbc-url: jdbc:mysql://124.111.55.41:3307/spring_practice?useSSL=false&useUnicode=true&allowPublicKeyRetrieval=true
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: everyplay1!
+    hikari :
+      connection-timeout: 3000
+      validation-timeout: 3000
+      minimum-idle: 5
+      max-lifetime: 240000
+      maximum-pool-size: 20
+
+springdoc:
+  version: '@project.version@'
+  api-docs:
+    path: /api-docs
+  default-consumes-media-type: application/json
+  default-produces-media-type: application/json
+  swagger-ui:
+    operations-sorter: alpha
+    tags-sorter: alpha
+    path: /swagger-ui.html
+    disable-swagger-default-url: true
+    display-query-params-without-oauth2: true
+    doc-expansion: none
+  paths-to-match:
+    - /api/**

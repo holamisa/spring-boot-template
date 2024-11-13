@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <!-- Console appender -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Rolling File appender -->
+    <appender name="ROLLING_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logs/spring-template.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- Rotate daily and keep logs for 30 days -->
+            <fileNamePattern>logs/spring-template-%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>1000</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <springProfile name="dev">
+        <include resource="logback-spring-dev.xml"/>
+    </springProfile>
+
+    <springProfile name="prod">
+        <include resource="logback-spring-prod.xml"/>
+    </springProfile>
+
+    <!-- Root logger, logs to both console and file -->
+    <root level="info">
+        <appender-ref ref="CONSOLE" />
+        <appender-ref ref="ROLLING_FILE" />
+    </root>
+    <root level="error">
+        <appender-ref ref="EMAIL_APPENDER" />
+    </root>
+</configuration>

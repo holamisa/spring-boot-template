@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <!--    Email Appender-->
+    <appender name="EMAIL_APPENDER" class="ch.qos.logback.classic.net.SMTPAppender">
+        <smtpHost>smtp.worksmobile.com</smtpHost>
+        <smtpPort>587</smtpPort>
+        <username>no-reply@everyplay.co.kr</username>
+        <password>PkzmTdNYGw0q</password>
+        <!-- one or more recipients are possible -->
+        <to>jeongbj@everyplay.co.kr</to>
+        <!--        <to>jeongbj@everyplay.co.kr</to>-->
+        <from>no-reply@everyplay.co.kr</from>
+        <subject>[PRE SERVER ERROR] Spring-Template : %logger{20} - %msg</subject>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{35} - %msg%n</pattern>
+        </layout>
+    </appender>
+</configuration>

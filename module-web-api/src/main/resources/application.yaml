@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: module-web-api
+  profiles:
+    active: development # development // production

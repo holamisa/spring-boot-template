@@ -34,7 +34,7 @@ subprojects {
 
 	dependencies {
 
-		// Lombok for reducing boilerplate code
+		// Lombok
 		// https://mvnrepository.com/artifact/org.projectlombok/lombok
 		compileOnly 'org.projectlombok:lombok:1.18.30'
 		annotationProcessor 'org.projectlombok:lombok:1.18.30'
@@ -45,11 +45,6 @@ subprojects {
 		// 로깅
 		// https://mvnrepository.com/artifact/ch.qos.logback/logback-classic
 		testImplementation group: 'ch.qos.logback', name: 'logback-classic', version: '1.5.6'
-
-		// Testing dependencies
-		testImplementation 'org.springframework.boot:spring-boot-starter-test'
-		testImplementation platform('org.junit:junit-bom:5.9.1')
-		testImplementation 'org.junit.jupiter:junit-jupiter'
 	}
 
 	test {
