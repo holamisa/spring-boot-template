@@ -3,6 +3,7 @@ package co.kr.bongjae.web.domain.auth.business;
 import co.kr.bongjae.web.common.annotation.Business;
 import co.kr.bongjae.web.domain.auth.model.LoginRequestDto;
 import co.kr.bongjae.web.domain.auth.model.LoginTokenDTO;
+import co.kr.bongjae.web.domain.auth.model.UserRegisterRequestDTO;
 import co.kr.bongjae.web.domain.auth.service.AuthService;
 import lombok.RequiredArgsConstructor;
 
@@ -22,6 +23,11 @@ public class AuthBusiness {
      */
     public LoginTokenDTO login(String authorizationHeader) {
         LoginRequestDto loginRequestData = authService.getLoginRequestDataFromHeader(authorizationHeader);
-        return authService.login(loginRequestData);
+        return authService.login(loginRequestData.email(), loginRequestData.password());
+    }
+
+    public void register(UserRegisterRequestDTO request) {
+
+
     }
 }

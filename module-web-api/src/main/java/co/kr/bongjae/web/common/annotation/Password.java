@@ -1,6 +1,6 @@
 package co.kr.bongjae.web.common.annotation;
 
-import co.kr.bongjae.web.validator.PhoneNumberValidator;
+import co.kr.bongjae.web.validator.PasswordValidator;
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
 
@@ -9,17 +9,15 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-/**
- * 전화번호 양식을 검증하는 어노테이션
- */
-@Constraint(validatedBy = {PhoneNumberValidator.class})
+@Constraint(validatedBy = {PasswordValidator.class})
 @Target({ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface PhoneNumber {
+public @interface Password {
 
-    String message() default "옳바른 번호 양식이 아닙니다.";
+    String message() default "비밀번호는 4~12자 사이여야 하며, 최소 하나의 대문자와 특수 문자를 포함해야 합니다.";
 
-    String regexp() default "^\\d{2,3}-\\d{3,4}-\\d{4}$";
+    // 4-12 문자, 최소 하나 대문자와 특수문자 포함
+    String regexp() default "^(?=.*[A-Z])(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{4,12}$";
 
     Class<?>[] groups() default { };
 

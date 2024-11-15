@@ -112,4 +112,13 @@ public class UserService {
             return userRepository.findFirstByEmailAndStatus(email, UserStatus.REGISTERED).orElse(null);
         }
     }
+
+    /**
+     * 사용자 저장
+     * @param userEntity 사용자 엔티티
+     * @return 사용자 엔티티
+     */
+    public UserEntity save(UserEntity userEntity) {
+        return userRepository.save(userEntity);
+    }
 }
