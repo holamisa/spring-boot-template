@@ -29,6 +29,7 @@ public class UserService {
 
     /**
      * 사용자 ID로 조회
+     * JPA 사용
      * @param id 사용자 ID
      * @param throwNull NULL일 경우 예외 발생 여부
      * @return 사용자 엔티티
@@ -44,21 +45,30 @@ public class UserService {
 
     /**
      * 사용자 ID로 조회
+     * JPA 사용
      * @param id 사용자 ID
      * @return 사용자 엔티티
      */
     public UserEntity getUserById(Long id) {
-        return getUserById(id, true);
+        return getUserById(id, false);
     }
 
     /**
      * 사용자 전체 조회
+     * MyBatis 사용
      * @return 사용자 엔티티 리스트
      */
     public List<UserEntity> getAllUser() {
         return userMapper.selectAllUser();
     }
 
+    /**
+     * 사용자 ID로 조회
+     * MyBatis 사용
+     * @param id 사용자 ID
+     * @param throwNull NULL일 경우 예외 발생 여부
+     * @return 사용자 엔티티
+     */
     public UserEntity getUserByIdV2(Long id, Boolean throwNull) {
         if (throwNull != null && throwNull) {
             return userMapper.selectByIdAndStatus(id, UserStatus.REGISTERED)
@@ -68,7 +78,38 @@ public class UserService {
         }
     }
 
+    /**
+     * 사용자 ID로 조회
+     * MyBatis 사용
+     * @param id 사용자 ID
+     * @return 사용자 엔티티
+     */
     public UserEntity getUserByIdV2(Long id) {
-        return getUserByIdV2(id, true);
+        return getUserByIdV2(id, false);
+    }
+
+    /**
+     * 사용자 이메일로 조회
+     * JPA 사용
+     * @param email 사용자 이메일
+     * @return 사용자 엔티티
+     */
+    public UserEntity getUserByEmail(String email) {
+        return getUserByEmail(email, false);
+    }
+
+    /**
+     * 사용자 이메일로 조회
+     * @param email 사용자 이메일
+     * @param throwNull NULL일 경우 예외 발생 여부
+     * @return 사용자 엔티티
+     */
+    public UserEntity getUserByEmail(String email, Boolean throwNull) {
+        if (throwNull != null && throwNull) {
+            return userRepository.findFirstByEmailAndStatus(email, UserStatus.REGISTERED)
+                    .orElseThrow(() -> new ApiException(UserErrorCode.USER_NOT_FOUND));
+        } else {
+            return userRepository.findFirstByEmailAndStatus(email, UserStatus.REGISTERED).orElse(null);
+        }
     }
 }

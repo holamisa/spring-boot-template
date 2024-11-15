@@ -19,3 +19,4 @@ springdoc:
     doc-expansion: none
   paths-to-match:
     - /api/**
+    - /open-api/**

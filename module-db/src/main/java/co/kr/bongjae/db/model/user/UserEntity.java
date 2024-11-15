@@ -8,6 +8,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
 
@@ -57,11 +59,14 @@ public class UserEntity extends BaseEntity {
     /**
      * 가입일
      */
+    @CreationTimestamp
+    @Column(nullable = false, updatable = false)
     private LocalDateTime registeredAt;
 
     /**
      * 해지일
      */
+    @Column(nullable = true, updatable = true)
     private LocalDateTime unregisteredAt;
 
     /**

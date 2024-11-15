@@ -23,6 +23,7 @@ public class UserBusiness {
 
     /**
      * 사용자 조회
+     * JPA 사용
      * @param id 사용자 ID
      * @return 사용자 DTO
      */
@@ -33,6 +34,12 @@ public class UserBusiness {
         return userConverter.toDto(userEntity);
     }
 
+    /**
+     * 사용자 조회
+     * Mybatis 사용
+     * @param id 사용자 ID
+     * @return 사용자 DTO
+     */
     public UserDTO getUserByIdV2(Long id) {
 
         var userEntity = userService.getUserByIdV2(id);
@@ -42,6 +49,7 @@ public class UserBusiness {
 
     /**
      * 모든 사용자 조회
+     * Mybatis 사용
      * @return 사용자 DTO 리스트
      */
     public List<UserDTO> getAllUser(){

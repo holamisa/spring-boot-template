@@ -1,5 +1,6 @@
 package co.kr.bongjae.web.domain.user.controller;
 
+import co.kr.bongjae.web.common.annotation.Timer;
 import co.kr.bongjae.web.common.api.ApiResult;
 import co.kr.bongjae.web.domain.user.business.UserBusiness;
 import co.kr.bongjae.web.domain.user.model.UserDTO;
@@ -11,10 +12,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -31,45 +29,60 @@ public class UserApiController {
 
     /**
      * 사용자 조회
+     * JPA 사용
      * @param id 사용자 ID
      * @return 사용자 DTO
      */
-    @GetMapping()
+    @GetMapping("/{id}")
+//    @GetMapping("/{id:[0-9]+}")
     @Operation(summary = "사용자 조회", description = "ID로 사용자 조회")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Success", content = @Content(mediaType = "application/json",
                     schema = @Schema(implementation = UserDTO.class))),
             @ApiResponse(responseCode = "404", description = "Not Found"),
     })
+    @Timer
     public ApiResult<UserDTO> getUserById(
             @Parameter(name = "id", description = "사용자 ID", required = true)
-            @RequestParam(required = true) Long id) {
+            @PathVariable(required = true) Long id) {
 
         var user = userBusiness.getUserById(id);
         return ApiResult.OK(user);
     }
 
-    @GetMapping("/v2")
+    /**
+     * 사용자 조회
+     * MyBatis 사용
+     * @param id 사용자 ID
+     * @return 사용자 DTO
+     */
+    @GetMapping("/v2/{id}")
     @Operation(summary = "사용자 조회", description = "ID로 사용자 조회")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Success", content = @Content(mediaType = "application/json",
                     schema = @Schema(implementation = UserDTO.class))),
             @ApiResponse(responseCode = "404", description = "Not Found"),
     })
+    @Timer
     public ApiResult<UserDTO> getUserByIdV2(
             @Parameter(name = "id", description = "사용자 ID", required = true)
-            @RequestParam(required = true) Long id) {
+            @PathVariable(required = true) Long id) {
 
         var user = userBusiness.getUserByIdV2(id);
         return ApiResult.OK(user);
     }
 
-    @GetMapping("/all")
+    /**
+     * 모든 사용자 조회
+     * @return 사용자 DTO 리스트
+     */
+    @GetMapping()
     @Operation(summary = "모든 사용자 조회", description = "사용자 조회")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Success", content = @Content(mediaType = "application/json",
                     schema = @Schema(implementation = UserDTO.class))),
     })
+    @Timer
     public ApiResult<List<UserDTO>> getAllUser(){
         var users = userBusiness.getAllUser();
         return ApiResult.OK(users);

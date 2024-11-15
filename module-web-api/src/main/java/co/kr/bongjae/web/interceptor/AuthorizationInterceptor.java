@@ -1,5 +1,7 @@
 package co.kr.bongjae.web.interceptor;
 
+import co.kr.bongjae.web.common.error.TokenErrorCode;
+import co.kr.bongjae.web.common.exception.ApiException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -32,12 +34,14 @@ public class AuthorizationInterceptor implements HandlerInterceptor {
         }
 
         // header 검증
-        var accessToken = request.getHeader("authorization-token");
+        var accessToken = request.getHeader("bearer-token");
         log.info("accessToken : {}", accessToken);
+
+        if(accessToken == null){
+            throw new ApiException(TokenErrorCode.NOT_FOUND_TOKEN);
+        }
+
         return true;
-//        if(accessToken == null){
-//            throw new ApiException(TokenErrorCode.NOT_FOUND_TOKEN);
-//        }
 //        var userId = tokenBusiness.validationToken(accessToken);
 //
 //        if(userId != null){
@@ -46,9 +50,9 @@ public class AuthorizationInterceptor implements HandlerInterceptor {
 //
 //            return true;
 //        }
-
+//
 //        throw new ApiException(TokenErrorCode.AUTHORIZATION_FAILURE);
 
-////        return HandlerInterceptor.super.preHandle(request, response, handler);
+//        return HandlerInterceptor.super.preHandle(request, response, handler);
     }
 }
