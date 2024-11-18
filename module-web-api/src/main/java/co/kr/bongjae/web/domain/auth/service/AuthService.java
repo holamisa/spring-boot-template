@@ -12,6 +12,7 @@ import co.kr.bongjae.web.domain.token.service.AuthType;
 import co.kr.bongjae.web.domain.token.service.TokenService;
 import co.kr.bongjae.web.domain.user.service.UserService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -19,13 +20,14 @@ import java.time.LocalDateTime;
 import java.util.Base64;
 import java.util.Optional;
 
+@Slf4j // 로깅
 @Service // 서비스 로직임을 명시해줌
 @RequiredArgsConstructor // final 또는 @NonNull 인자만 가지는 생성자 자동 생성
 public class AuthService {
 
     /**
      * 1. 로그인 - 완료
-     * 2. 회원가입
+     * 2. 회원가입 - 완료
      * 3. 회원 탈퇴
      */
 
@@ -78,9 +80,23 @@ public class AuthService {
             throw new ApiException(UserErrorCode.USER_NOT_FOUND);
         }
 
-        // 4. 토큰 발급
+        return login(userEntity);
+    }
+
+    /**
+     * 로그인
+     * @param userEntity 사용자 엔티티
+     * @return 로그인 토큰 DTO
+     */
+    public LoginTokenDTO login(UserEntity userEntity){
+        log.info("AuthService login {}", userEntity.toString());
+
+        // 1. 토큰 발급
         var accessToken = tokenService.issueAccessToken(userEntity.getId());
         var refreshToken = tokenService.issueRefreshToken(userEntity.getId());
+
+        // 2. 로그인 시간 업데이트
+        updateLastLoginAt(userEntity);
 
         return LoginTokenDTO.builder()
                 .accessToken(accessToken.getToken())
@@ -88,6 +104,19 @@ public class AuthService {
                 .refreshToken(refreshToken.getToken())
                 .refreshTokenExpiredAt(refreshToken.getExpiredAt())
                 .build();
+    }
+
+    /**
+     * 마지막 로그인 시간 업데이트
+     * @param userEntity 사용자 엔티티
+     */
+    public void updateLastLoginAt(UserEntity userEntity){
+        Optional.ofNullable(userEntity)
+                .map(x -> {
+                    x.setLastLoginAt(LocalDateTime.now());
+                    return userService.save(x);
+                })
+                .orElseThrow(() -> new ApiException(ErrorCode.NULL_POINT, "User Entity NULL"));
     }
 
     /**
@@ -104,6 +133,7 @@ public class AuthService {
                         throw new ApiException(UserErrorCode.USER_DUPLICATE);
                     }
 
+                    x.setPassword(passwordEncoder.encode(x.getPassword()));
                     x.setStatus(UserStatus.REGISTERED);
                     x.setRegisteredAt(LocalDateTime.now());
                     return userService.save(x);

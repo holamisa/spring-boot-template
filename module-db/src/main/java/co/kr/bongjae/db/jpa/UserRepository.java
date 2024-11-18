@@ -28,4 +28,6 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
      * @return 사용자 정보
      */
     Optional<UserEntity> findFirstByEmailAndStatus(String email, UserStatus status);
+
+
 }
