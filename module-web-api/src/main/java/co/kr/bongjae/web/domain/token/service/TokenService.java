@@ -5,12 +5,14 @@ import co.kr.bongjae.web.common.exception.ApiException;
 import co.kr.bongjae.web.domain.token.helper.JwtTokenHelper;
 import co.kr.bongjae.web.domain.token.model.TokenDTO;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.Objects;
 import java.util.Optional;
 
+@Slf4j // 로깅
 @Service // 서비스 로직임을 명시해줌
 @RequiredArgsConstructor // final 또는 @NonNull 인자만 가지는 생성자 자동 생성
 public class TokenService {

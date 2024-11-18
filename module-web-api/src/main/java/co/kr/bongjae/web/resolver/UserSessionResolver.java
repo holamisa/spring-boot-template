@@ -42,7 +42,8 @@ public class UserSessionResolver implements HandlerMethodArgumentResolver {
 
         if (requestContext != null) {
             Object userId = requestContext.getAttribute("userId", RequestAttributes.SCOPE_REQUEST);
-            UserEntity userEntity = userService.getUserById(Long.parseLong(Objects.requireNonNull(userId).toString()));
+            UserEntity userEntity = userService.getUserById(Long.parseLong(Objects.requireNonNull(userId).toString()), true);
+
             return UserDTO.builder()
                     .id(userEntity.getId())
                     .name(userEntity.getName())

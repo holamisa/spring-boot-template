@@ -41,7 +41,7 @@ public class UserApiController {
                     schema = @Schema(implementation = UserDTO.class))),
             @ApiResponse(responseCode = "404", description = "Not Found"),
     })
-    @Timer
+//    @Timer
     public ApiResult<UserDTO> getUserById(
             @Parameter(name = "id", description = "사용자 ID", required = true)
             @PathVariable(required = true) Long id) {
@@ -63,7 +63,7 @@ public class UserApiController {
                     schema = @Schema(implementation = UserDTO.class))),
             @ApiResponse(responseCode = "404", description = "Not Found"),
     })
-    @Timer
+//    @Timer
     public ApiResult<UserDTO> getUserByIdV2(
             @Parameter(name = "id", description = "사용자 ID", required = true)
             @PathVariable(required = true) Long id) {
@@ -82,7 +82,7 @@ public class UserApiController {
             @ApiResponse(responseCode = "200", description = "Success", content = @Content(mediaType = "application/json",
                     schema = @Schema(implementation = UserDTO.class))),
     })
-    @Timer
+//    @Timer
     public ApiResult<List<UserDTO>> getAllUser(){
         var users = userBusiness.getAllUser();
         return ApiResult.OK(users);

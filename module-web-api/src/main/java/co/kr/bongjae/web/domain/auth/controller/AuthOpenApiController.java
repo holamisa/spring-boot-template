@@ -40,7 +40,7 @@ public class AuthOpenApiController {
                     schema = @Schema(implementation = LoginTokenDTO.class))),
             @ApiResponse(responseCode = "404", description = "Not Found"),
     })
-    @Timer
+//    @Timer
     public ApiResult<LoginTokenDTO> login(
             @Valid @Parameter(hidden = true)
             @RequestHeader(HttpHeaders.AUTHORIZATION) String authorizationHeader) {
@@ -61,7 +61,7 @@ public class AuthOpenApiController {
                     schema = @Schema(implementation = LoginTokenDTO.class))),
             @ApiResponse(responseCode = "404", description = "Not Found"),
     })
-    @Timer
+//    @Timer
     public ApiResult<LoginTokenDTO> register(
             @Valid
             @RequestBody UserRegisterRequestDTO request) {

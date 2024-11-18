@@ -26,12 +26,6 @@ import java.util.Optional;
 public class AuthService {
 
     /**
-     * 1. 로그인 - 완료
-     * 2. 회원가입 - 완료
-     * 3. 회원 탈퇴
-     */
-
-    /**
      * 토큰 서비스
      */
     private final TokenService tokenService;
@@ -77,7 +71,7 @@ public class AuthService {
         // 2. 패스워드가 일치하지 않으면 에러
 //        var encPassword = passwordEncoder.encode(password);
         if (!passwordEncoder.matches(password, userEntity.getPassword())) {
-            throw new ApiException(UserErrorCode.USER_NOT_FOUND);
+            throw new ApiException(UserErrorCode.PASSWORD_INCORRECT);
         }
 
         return login(userEntity);
@@ -139,5 +133,19 @@ public class AuthService {
                     return userService.save(x);
                 })
                 .orElseThrow(() -> new ApiException(ErrorCode.NULL_POINT, "User Entity NULL"));
+    }
+
+    /**
+     * 회원탈퇴
+     * @param userId 사용자 ID
+     * @return 사용자 엔티티
+     */
+    public UserEntity unRegister(Long userId){
+        // 회원 존재 확인
+        UserEntity userEntity = userService.getUserById(userId, true);
+        userEntity.setStatus(UserStatus.UNREGISTERED);
+        userEntity.setUnregisteredAt(LocalDateTime.now());
+
+        return userService.save(userEntity);
     }
 }

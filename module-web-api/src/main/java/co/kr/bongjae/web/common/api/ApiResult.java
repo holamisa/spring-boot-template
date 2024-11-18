@@ -46,6 +46,16 @@ public class ApiResult<T> {
     }
 
     /**
+     * 성공 응답
+     * @return 성공 응답
+     */
+    public static ApiResult<Object> OK(){
+        return ApiResult.<Object>builder()
+                .result(Result.OK())
+                .build();
+    }
+
+    /**
      * 에러 응답
      * @param result 응답 결과
      * @return 에러 응답

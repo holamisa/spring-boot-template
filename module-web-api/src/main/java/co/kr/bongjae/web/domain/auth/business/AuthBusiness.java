@@ -7,6 +7,7 @@ import co.kr.bongjae.web.domain.auth.model.LoginTokenDTO;
 import co.kr.bongjae.web.domain.auth.model.UserRegisterRequestDTO;
 import co.kr.bongjae.web.domain.auth.service.AuthService;
 import co.kr.bongjae.web.domain.user.business.UserConverter;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 @Business // 비즈니스 로직임을 명시해줌
@@ -43,6 +44,7 @@ public class AuthBusiness {
      * @param request 회원가입 요청
      * @return 로그인 토큰
      */
+    @Transactional // 해당 메서드는 트랜잭션 처리
     public LoginTokenDTO register(UserRegisterRequestDTO request) {
 
         UserEntity newUser = authConverter.toEntity(request);
@@ -53,5 +55,13 @@ public class AuthBusiness {
 
         // 2. 신규 사용자 생성 후 로그인 처리
         return authService.login(userEntity);
+    }
+
+    /**
+     * 회원 탈퇴
+     * @param userId 사용자 ID
+     */
+    public void unRegister(Long userId) {
+        authService.unRegister(userId);
     }
 }
