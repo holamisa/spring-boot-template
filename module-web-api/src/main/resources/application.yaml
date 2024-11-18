@@ -2,7 +2,7 @@ spring:
   application:
     name: module-web-api
   profiles:
-    active: development # development // production
+    active: production # development // production
 
 springdoc:
   version: '@project.version@'

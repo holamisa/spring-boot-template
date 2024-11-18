@@ -1,5 +1,6 @@
 package co.kr.bongjae.web.domain.user.model;
 
+import co.kr.bongjae.db.model.user.enums.UserStatus;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -26,6 +27,9 @@ public class UserDTO {
 
     @Schema(description = "사용자 주소")
     private String address;
+
+    @Schema(description = "사용자 상태")
+    private UserStatus status;
 
     @Schema(description = "사용자 등록일")
     private LocalDateTime registeredAt;

@@ -20,6 +20,7 @@ public class UserConverter {
                         .name(x.getName())
                         .email(x.getEmail())
                         .address(x.getAddress())
+                        .status(x.getStatus())
                         .registeredAt(x.getRegisteredAt())
                         .build())
                 .orElse(null);
@@ -41,6 +42,7 @@ public class UserConverter {
                         .name(x.getName())
                         .email(x.getEmail())
                         .address(x.getAddress())
+                        .status(x.getStatus())
                         .registeredAt(x.getRegisteredAt())
                         .build())
                 .orElseThrow(() -> new ApiException(ErrorCode.NULL_POINT, "UserDTO NULL"));

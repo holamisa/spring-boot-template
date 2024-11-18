@@ -1,0 +1,13 @@
+version: "3"
+services:
+  application:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    container_name: spring-boot-template
+    ports:
+      - "8081:8081"
+    volumes:
+      - ./logs:/logs
+    environment:
+      TZ: Asia/Seoul
