@@ -1,3 +1,5 @@
 rootProject.name = 'spring-template'
 include("module-db")
 include("module-web-api")
+include 'jenkins'
+
