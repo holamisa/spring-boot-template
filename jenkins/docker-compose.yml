@@ -1,11 +1,11 @@
 version: "3"
 services:
   jenkins:
-    image: jenkins-custom
+    image: jenkins/jenkins:lts
     container_name: jenkins-main
     user: root
     ports:
-      - "9060:8080"
+      - "8080:8080"
       - "50000:50000"
     environment:
       - JAVA_OPS=-Xmx1g

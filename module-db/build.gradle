@@ -14,7 +14,7 @@ bootJar {
 	enabled = true
 }
 jar {
-	enabled = false
+	enabled = true
 }
 
 dependencies {
