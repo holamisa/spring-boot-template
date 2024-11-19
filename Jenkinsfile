@@ -1,14 +1,14 @@
 pipeline {
     agent any
     environment {
-        DOCKER_IMAGE = 'bongjaejeong/spring-boot-template'
+        DOCKER_IMAGE = 'bongjaejeong/spring-boot-template-pre'
     }
     stages {
         stage('Checkout') {
             steps {
                 checkout([
                     $class: 'GitSCM',
-                    branches: [[name: '*/main']],
+                    branches: [[name: '*/pre']],
                     userRemoteConfigs: [[
                         url: 'https://github.com/holamisa/spring-boot-template.git',
                         credentialsId: 'git_access_token'
@@ -44,9 +44,9 @@ pipeline {
             steps {
                 sh '''
                     docker pull ${DOCKER_IMAGE}:${BUILD_NUMBER}
-                    docker stop spring-boot-template || true
-                    docker rm spring-boot-template || true
-                    docker run -d --name spring-boot-template -p 8081:8081 ${DOCKER_IMAGE}:${BUILD_NUMBER}
+                    docker stop spring-boot-template-pre || true
+                    docker rm spring-boot-template-pre || true
+                    docker run -d --name spring-boot-template-pre -p 8082:8082 ${DOCKER_IMAGE}:${BUILD_NUMBER}
                 '''
             }
         }
