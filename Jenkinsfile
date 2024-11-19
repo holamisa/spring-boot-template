@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    environment {
+        DOCKER_IMAGE = 'bongjaejeong/spring-boot-template'
+    }
     stages {
         stage('Checkout') {
             steps {
@@ -23,27 +26,28 @@ pipeline {
                 sh './gradlew :module-web-api:clean :module-web-api:build'
             }
         }
-        stage('Dockerize') {
+        stage('Docker Build & Push') {
             steps {
                 sh '''
-                    docker stop spring-boot-template || true
-                    docker rm spring-boot-template || true
-                    docker rmi spring-boot-template || true
-                    docker build -t spring-boot-template:${BUILD_NUMBER} ./module-web-api
+                    docker build -t ${DOCKER_IMAGE}:${BUILD_NUMBER} ./module-web-api
+                    echo "${DOCKER_HUB_PASSWORD}" | docker login -u "${DOCKER_HUB_USERNAME}" --password-stdin
+                    docker push ${DOCKER_IMAGE}:${BUILD_NUMBER}
                 '''
             }
         }
         stage('Deploy') {
             steps {
                 sh '''
-                    docker run -d --name spring-boot-template -p 8081:8081 spring-boot-template:${BUILD_NUMBER}
+                    docker pull ${DOCKER_IMAGE}:${BUILD_NUMBER}
+                    docker stop spring-boot-template || true
+                    docker rm spring-boot-template || true
+                    docker run -d --name spring-boot-template -p 8081:8081 ${DOCKER_IMAGE}:${BUILD_NUMBER}
                 '''
             }
         }
     }
     post {
         always {
-            // Cleanup steps go here directly
             sh '''
                 echo "Performing cleanup..."
                 docker system prune -f
