@@ -32,9 +32,10 @@ pipeline {
                                                   usernameVariable: 'USERNAME',
                                                   passwordVariable: 'PASSWORD')]) {
                     sh '''
-                        docker build -t ${DOCKER_IMAGE}:${BUILD_NUMBER} ./module-web-api
+                        docker build -t ${DOCKER_IMAGE}:${BUILD_NUMBER} -t ${DOCKER_IMAGE}:latest ./module-web-api
                         echo "${PASSWORD}" | docker login -u "${USERNAME}" --password-stdin
                         docker push ${DOCKER_IMAGE}:${BUILD_NUMBER}
+                        docker push ${DOCKER_IMAGE}:latest
                     '''
                 }
             }
