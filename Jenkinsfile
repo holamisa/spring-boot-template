@@ -46,7 +46,7 @@ pipeline {
                     docker pull ${DOCKER_IMAGE}:${BUILD_NUMBER}
                     docker stop spring-boot-template-pre || true
                     docker rm spring-boot-template-pre || true
-                    docker run -d --name spring-boot-template-pre -p 8082:8082 ${DOCKER_IMAGE}:${BUILD_NUMBER}
+                    docker run -d --name spring-boot-template-pre -p 8082:8081 ${DOCKER_IMAGE}:${BUILD_NUMBER}
                 '''
             }
         }
