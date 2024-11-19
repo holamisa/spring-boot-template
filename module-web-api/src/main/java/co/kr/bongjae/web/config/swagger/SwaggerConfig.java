@@ -13,7 +13,7 @@ import java.util.Arrays;
 @OpenAPIDefinition(
         info = @io.swagger.v3.oas.annotations.info.Info(title = "Spring Boot API 명세서",
                 description = "기본 API 명세서",
-                version = "v0.0.1"))
+                version = "v0.0.2"))
 @Configuration
 public class SwaggerConfig {
 
