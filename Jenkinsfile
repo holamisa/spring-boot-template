@@ -39,15 +39,6 @@ pipeline {
                 }
             }
         }
-        stage('Docker Build & Push') {
-            steps {
-                sh '''
-                    docker build -t ${DOCKER_IMAGE}:${BUILD_NUMBER} ./module-web-api
-                    echo "${DOCKER_HUB_PASSWORD}" | docker login -u "${DOCKER_HUB_USERNAME}" --password-stdin
-                    docker push ${DOCKER_IMAGE}:${BUILD_NUMBER}
-                '''
-            }
-        }
         stage('Deploy') {
             steps {
                 sh '''
