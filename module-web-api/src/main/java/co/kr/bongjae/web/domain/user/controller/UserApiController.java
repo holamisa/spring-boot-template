@@ -30,6 +30,7 @@ public class UserApiController {
     /**
      * 사용자 조회
      * JPA 사용
+     *
      * @param id 사용자 ID
      * @return 사용자 DTO
      */
@@ -53,6 +54,7 @@ public class UserApiController {
     /**
      * 사용자 조회
      * MyBatis 사용
+     *
      * @param id 사용자 ID
      * @return 사용자 DTO
      */
@@ -74,6 +76,7 @@ public class UserApiController {
 
     /**
      * 모든 사용자 조회
+     *
      * @return 사용자 DTO 리스트
      */
     @GetMapping()
@@ -83,7 +86,7 @@ public class UserApiController {
                     schema = @Schema(implementation = UserDTO.class))),
     })
 //    @Timer
-    public ApiResult<List<UserDTO>> getAllUser(){
+    public ApiResult<List<UserDTO>> getAllUser() {
         var users = userBusiness.getAllUser();
         return ApiResult.OK(users);
     }

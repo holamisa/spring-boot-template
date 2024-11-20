@@ -2,7 +2,12 @@ spring:
   application:
     name: module-web-api
   profiles:
-    active: production # development // production
+    active: development # development // production
+  servlet:
+    multipart:
+      enabled: true # Enable multipart uploads
+      max-file-size: 1MB # 파일 최대 크기
+      max-request-size: 10MB # 요청 최대 크기
 
 springdoc:
   version: '@project.version@'

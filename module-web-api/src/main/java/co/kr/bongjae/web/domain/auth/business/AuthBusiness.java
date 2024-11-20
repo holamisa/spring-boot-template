@@ -31,6 +31,7 @@ public class AuthBusiness {
 
     /**
      * 로그인
+     *
      * @param authorizationHeader Authorization 헤더
      * @return 로그인 토큰
      */
@@ -41,6 +42,7 @@ public class AuthBusiness {
 
     /**
      * 회원가입
+     *
      * @param request 회원가입 요청
      * @return 로그인 토큰
      */
@@ -59,6 +61,7 @@ public class AuthBusiness {
 
     /**
      * 회원 탈퇴
+     *
      * @param userId 사용자 ID
      */
     public void unRegister(Long userId) {

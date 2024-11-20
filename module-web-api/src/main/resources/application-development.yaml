@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 8083
 
 logging:
   level:
@@ -27,3 +27,6 @@ spring:
       minimum-idle: 5
       max-lifetime: 240000
       maximum-pool-size: 20
+
+upload:
+  directory: D:/testImg

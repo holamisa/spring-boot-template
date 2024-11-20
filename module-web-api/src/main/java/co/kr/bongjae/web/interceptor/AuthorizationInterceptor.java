@@ -42,6 +42,9 @@ public class AuthorizationInterceptor implements HandlerInterceptor {
 
         // header 검증
         var authorization = request.getHeader(HttpHeaders.AUTHORIZATION);
+        if(authorization == null){
+            throw new ApiException(TokenErrorCode.NOT_FOUND_TOKEN);
+        }
         log.info("authorization : {}", authorization);
         var accessToken = tokenService.getAuthorizationFromHeader(authorization, AuthType.BEARER);
         log.info("accessToken : {}", accessToken);
