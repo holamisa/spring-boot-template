@@ -23,5 +23,5 @@ RUN groupadd -f docker
 RUN usermod -aG docker jenkins
 
 
-#docker build -t jenkins-custom .
+#docker build -t jenkins-main .
 #docker-compose up -d
