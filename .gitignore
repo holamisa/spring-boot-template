@@ -41,3 +41,5 @@ out/
 ### Logs ###
 logs/
 /jenkins-git-key.pem
+
+/module-db/db/

@@ -12,3 +12,16 @@ CREATE TABLE IF NOT EXISTS `spring_practice`.`user` (
   `last_login_at` datetime(3) DEFAULT NULL COMMENT '마지막 로그인 시간',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='사용자';
+
+
+CREATE TABLE IF NOT EXISTS `file` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL COMMENT '파일 명',
+  `original_name` varchar(100) DEFAULT NULL COMMENT '원본 파일 명',
+  `path_url` varchar(500) NOT NULL COMMENT '파일 URL',
+  `size` int unsigned DEFAULT NULL COMMENT '파일 사이즈',
+  `extension` varchar(20) NOT NULL COMMENT '파일 확장자',
+  `status` varchar(50) DEFAULT NULL COMMENT '파일 상태',
+  `registered_at` datetime(3) NOT NULL COMMENT '생성 일자',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='파일';

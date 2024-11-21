@@ -19,14 +19,31 @@ spring:
   datasource:
     jdbc-url: jdbc:mysql://localhost:3307/spring_practice?useSSL=false&useUnicode=true&allowPublicKeyRetrieval=true
     driver-class-name: com.mysql.cj.jdbc.Driver
-    username: root
-    password: everyplay1!
+    username: holamisa
+    password: Bongbong1!
     hikari :
       connection-timeout: 3000
       validation-timeout: 3000
       minimum-idle: 5
       max-lifetime: 240000
       maximum-pool-size: 20
+  kafka:
+    consumer:
+      auto-offset-reset: earliest
+      bootstrap-servers: localhost:29092
+      group-id: module-web-api-group
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: co.kr.bongjae.web.domain.kafka.event
+    producer:
+      acks: -1
+      bootstrap-servers: localhost:29092
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+
+topic:
+  name: module-web-api-topic
 
 upload:
   directory: D:/testImg

@@ -1,0 +1,15 @@
+version: "3"
+services:
+  db:
+    image: mysql:latest
+    restart: always
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: Bongbong1!
+      MYSQL_DATABASE: spring_practice
+      MYSQL_USER: holamisa
+      MYSQL_PASSWORD: Bongbong1!
+      TZ: Asia/Seoul
+    volumes:
+      - ./db/mysql/data:/var/lib/mysql
