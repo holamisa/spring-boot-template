@@ -1,5 +1,5 @@
 server:
-  port: 8083
+  port: 8081
 
 logging:
   level:
@@ -17,7 +17,7 @@ token:
 
 spring:
   datasource:
-    jdbc-url: jdbc:mysql://localhost:3307/spring_practice?useSSL=false&useUnicode=true&allowPublicKeyRetrieval=true
+    jdbc-url: jdbc:mysql://124.111.55.41:3307/spring_practice?useSSL=false&useUnicode=true&allowPublicKeyRetrieval=true
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: holamisa
     password: Bongbong1!
