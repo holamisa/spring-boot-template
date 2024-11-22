@@ -47,7 +47,7 @@
     * Which events would you like to trigger this webhook? : Just the push event
     * Active : 체크
     * 참고 사항으로 로컬에서 진행 시 localhost 대신 외부 IP나 도메인을 입력해야 함.
-    * 방화벽 막혀있으면 ngrok 같은 툴을 사용하여 포트 포워딩을 해야함. --> ngrok http http://124.111.55.41:8080
+    * 방화벽 막혀있으면 ngrok 같은 툴을 사용하여 포트 포워딩을 해야함. --> ngrok http http://localhost:8080
   * Jenkins 관리 > 시스템 설정 > GitHub > PAT 연결
   * 새로운 Item -> Pipeline -> Pipleline script from SCM -> Git -> Repository URL 입력 -> Credential 선택 -> Branches to build 입력 -> Save (레포지토리 상위 폴더에 Jenkinsfile 필수)
   

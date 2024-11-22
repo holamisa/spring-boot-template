@@ -17,10 +17,10 @@ token:
 
 spring:
   datasource:
-    jdbc-url: jdbc:mysql://124.111.55.41:3307/spring_practice?useSSL=false&useUnicode=true&allowPublicKeyRetrieval=true
+    jdbc-url: jdbc:mysql://localhost:3307/spring_practice?useSSL=false&useUnicode=true&allowPublicKeyRetrieval=true
     driver-class-name: com.mysql.cj.jdbc.Driver
-    username: holamisa
-    password: Bongbong1!
+    username: 계정
+    password: 비밀번호
     hikari:
       connection-timeout: 3000
       validation-timeout: 3000
@@ -30,7 +30,7 @@ spring:
   kafka:
     consumer:
       auto-offset-reset: earliest
-      bootstrap-servers: 124.111.55.41:29092
+      bootstrap-servers: localhost:29092
       group-id: module-web-api-group
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
@@ -38,7 +38,7 @@ spring:
         spring.json.trusted.packages: co.kr.bongjae.web.domain.kafka.event
     producer:
       acks: -1
-      bootstrap-servers: 124.111.55.41:29092
+      bootstrap-servers: localhost:29092
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
 
